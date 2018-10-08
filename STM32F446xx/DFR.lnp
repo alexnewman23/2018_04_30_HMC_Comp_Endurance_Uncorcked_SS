@@ -1,0 +1,19 @@
+--cpu Cortex-M4.fp
+".\stm32f446xx\system_stm32f4xx.o"
+".\stm32f446xx\stm32f4xx_gpio.o"
+".\stm32f446xx\main.o"
+".\stm32f446xx\stm32f4xx_it.o"
+".\stm32f446xx\misc.o"
+".\stm32f446xx\stm32f4xx_can.o"
+".\stm32f446xx\stm32f4xx_rcc.o"
+".\stm32f446xx\stm32f4xx_tim.o"
+".\stm32f446xx\stm32f4xx_usart.o"
+".\stm32f446xx\stdout_usart.o"
+".\stm32f446xx\buttons_nucleo-f446re.o"
+".\stm32f446xx\led_nucleo-f446re.o"
+".\stm32f446xx\startup_stm32f446xx.o"
+".\stm32f446xx\retarget_io.o"
+--library_type=microlib --strict --scatter ".\STM32F446xx\DFR.sct"
+--diag_suppress=L6329 --summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "DFR.map" -o .\STM32F446xx\DFR.axf

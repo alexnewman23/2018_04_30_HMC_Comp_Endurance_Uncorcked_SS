@@ -1,0 +1,82 @@
+#define	STD_ID	0
+#define	EXT_ID	1
+
+
+
+int i=55;
+
+CanRxMsg* RxMessage;
+
+bool done	= false;
+
+do
+{
+	if
+	(	(RxMessage.IDE==CAN_Id_Standard)	and (RxMessage.StdId	=	My_ID_Table[i].CANID)
+		or
+		(RxMessage.IDE==CAN_Id_Extended)	and (RxMessage.ExtId	=	My_ID_Table[i].CANID)
+	)
+	{
+		My_ID_Table[i].Data	=	*((uint64_t *)(&(RxMessage.Data)));
+		My_ID_Table[i].Data	=	RxMessage.Data;
+		
+		done = true;
+	}
+	else
+	{
+		//	next thing
+	
+		i++;
+	}
+}
+until((i>=55) or done);
+
+
+
+#define	CANQ_SIZE	(30)
+CanTxMsg	MyQ_of_CAN_RX_messages[CANQ_SIZE];
+CanTxMsg	*RX_Read_Ptr	=	&MyQ_of_CAN_RX_messages[0];
+CanTxMsg	*RX_Write_Ptr	=	&MyQ_of_CAN_RX_messages[0];
+CanTxMsg	*Last	=	&MyQ_of_CAN_RX_messages[0];
+
+RX_Write_Ptr++;
+CanRxMsg
+
+
+uint8_t	Read_Index=0;
+
+
+//void CAN_Receive(CAN_TypeDef* CANx, uint8_t FIFONumber, CanRxMsg* RxMessage)
+CAN_Receive(CAN1, CAN_FIFO0, MyQ_of_CAN_RX_messages[Read_Index]);
+
+if(Read_Index 	>= CANQ_SIZE)
+{
+	Read_index = 0;
+}
+else
+{
+	//	...do nothing....
+}
+
+
+
+
+typedef struct  Shaun_s
+{
+	uint64_t	Data;
+	uint32_t	ID_TYPE	: 29;	//	Standard = 0, Extended != 0
+	uint32_t	PADDING	:	2;
+	uint32_t	CANID		:	1;
+	uint32_t	DUMMY;
+}
+Shaun_t;
+
+
+Shaun_t	My_ID_Table[55]	=
+{
+	{0, 0, STD_ID, 0x00210, 0},
+	{0, 0, EXT_ID, 0xFFFEC, 
+};
+
+
+
